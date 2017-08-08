@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <base target="_top">
+	  <!--------------------------------------------------------------------------------------------- -->
+	  <!-- JQUERY AND BOOSTRAP IMPORT -->
+	  <!--------------------------------------------------------------------------------------------- -->
+		  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+          <link rel="stylesheet" href="//cdn.materialdesignicons.com/1.9.32/css/materialdesignicons.min.css">
+		  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+      <!--------------------------------------------------------------------------------------------- -->
+	  <!-- END JQUERY AND BOOSTRAP IMPORT -->
+	  <!--------------------------------------------------------------------------------------------- -->
+
+	  <!--------------------------------------------------------------------------------------------- -->
+	  <!-- FIREBASE IMPORT -->
+	  <!--------------------------------------------------------------------------------------------- -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/4.0.0/firebase.js"></script>
+	  <!--------------------------------------------------------------------------------------------- -->
+	  <!-- END FIREBASE IMPORT -->
+	  <!--------------------------------------------------------------------------------------------- -->
+
+      <?!= Utility.include('baseStyle'); ?>
+
+   </head>
+
+   <body>
+       <div class="row">
+           <div class="col-xs-4 text-center">
+               <!-- AMIS LOGO -->
+               <?!= Utility.include('amisLogo'); ?>
+           </div>
+            <div class="col-xs-8">
+            	<br>
+            	<h4><b><?= countryCell ?></b></h4>
+            	<br><br>
+                <?= datasourceCell ?>
+            	<br>
+            </div>
+       </div>
+   <br/>
+   <br/>
+
+    <div class="" id="devToolbar" <?= (devMode)?"":"hidden" ?> >
+           <button onclick="loginWithGoogle()">loginWithGoogle()</button>
+           <button onclick="logout()">logout()</button>
+           <button onclick="console.clear()">console.clear</button>
+   </div>
+   <!-- hidden part -->
+    <div id="userActionsDiv" hidden class="container">
+    <!--
+        <div class="row">
+            <div class="col-xs-12 text-left">
+                Load data from the AMIS database:
+            </div>
+        </div>
+        <br>
+        <div class="row">
+        	<div class="col-xs-12 text-right">
+                <button id="buttonFetch" class="btn btn-primary btn-lg">Load <i class="mdi mdi-cloud-download"></i></button>
+        	</div>
+        </div>
+        <br>
+        <br>
+        -->
+        <div class="row">
+            <div class="col-xs-12 text-left">
+                Save data to the AMIS database:
+            </div>
+        </div>
+        <br>
+        <div class="row">
+        	<div class="col-xs-12 text-right">
+                <button id="buttonSave" class="btn btn-primary btn-lg">Save <i class="mdi mdi-cloud-upload"></i></button>
+        	</div>
+        </div>        
+    </div>    
+   <!-- END hidden part -->
+
+   <div class="container" id="loading">
+   	<div class="row">
+   		<div class="text-center" id="loadingText">
+               <h4>Loading</h4>
+           </div>
+           <div class="animationload">
+               <div class="osahanloading"></div>
+           </div>
+   	</div>
+   </div>
+   
+   <?!= Utility.include('amisMenuJs'); ?>
+   </body>
+</html>
