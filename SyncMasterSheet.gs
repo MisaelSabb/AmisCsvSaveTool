@@ -19,7 +19,7 @@ var SyncMasterSheet=new function(){
     var saveNode = 'dataFromCsvTool/';
     
     //call the library to store data into FIREBASE
-    AmisMarketApp.FirebaseConnector.writeOnFirebase(excelData,saveNode,userToken);
+    FirebaseConnector.writeOnFirebase(excelData,saveNode,userToken);
   }
   //---------------------------------------------------------
   // END Saving Sheet Data function

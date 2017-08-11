@@ -60,7 +60,7 @@
 
              if(!user_data){
                  //alert("User "+user.email+" is not authorized!");
-                 google.script.run.LIB_FUNC( "AmisMarketApp.Utility.popUpAlert");
+                 google.script.run.LIB_FUNC( "Utility.popUpAlert");
                  return;
              }
              console.log('USER_DATA', user_data);
@@ -95,7 +95,7 @@
                     });
                  }
                  console.log( 'gettoken', data );
-                 google.script.run.LIB_FUNC( "AmisMarketApp.FirebaseConnector.setToken", data );                 
+                 google.script.run.LIB_FUNC( "FirebaseConnector.setToken", data );                 
              } );
          });
        }
@@ -111,7 +111,7 @@
             //refresh the token
             firebase.auth().currentUser.getToken(true).then(function(idToken) {
                 console.log('refresh token ok', idToken);
-                google.script.run.LIB_FUNC( "AmisMarketApp.FirebaseConnector.setToken", idToken );
+                google.script.run.LIB_FUNC( "FirebaseConnector.setToken", idToken );
                 callback();
             }).catch(function(error) {
                 console.log('refresh token ko', error);
@@ -129,7 +129,7 @@
        	} ).catch( function( error ) {
             console.log('ERROR', error);
        		//alert("User "+error.email+" is not authorized!");
-            google.script.run.LIB_FUNC( "AmisMarketApp.Utility.popUpAlert");
+            google.script.run.LIB_FUNC( "Utility.popUpAlert");
        		// Handle Errors here.
        		var errorCode = error.code;
        		var errorMessage = error.message;

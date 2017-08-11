@@ -10,7 +10,7 @@ function onOpen(){
   
 }  
 function onEdit(e){}
-function LIB_FUNC(){AmisMarketApp.Utility.LIB_FUNC.apply(this, arguments);}
+function LIB_FUNC(){AmisLib.Utility.LIB_FUNC.apply(this, arguments);}
 
 function openSidebar(){
   //create sidebar
