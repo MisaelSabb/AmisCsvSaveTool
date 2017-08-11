@@ -7,13 +7,13 @@ var Config={
 	 * dbName on firebase
 	 * @type {String}
 	 */
-	dbName:"amis-market-sabbadini",
+	dbName:"amis-9189b",
 
 	/**
 	 * apiKey on firebase
 	 * @type {String}
 	 */
-	apiKey: "AIzaSyC-ievlwu0F4fb7StmtiiF8AV1sPO41Jfw",
+	apiKey: "AIzaSyA3aklD6VK81sc6ui_vjf1IceAi_Zgtjqo",
 
 	/**
 	 * spreadsheet config
