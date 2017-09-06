@@ -65,7 +65,7 @@
              }
              console.log('USER_DATA', user_data);
 
-             if ( user_data.type==="admin" ) {
+             if ( user_data.type==="admin" || user_data.type==="secretariat" ) {
                  //show normal menu
                  $( "#userActionsDiv" ).show();
              } else {
@@ -86,7 +86,7 @@
              user.getToken().then( function( data ) {
                  userToken=data;
 
-                 if ( user_data.type=="admin" ) {                 
+                 if ( user_data.type=="admin" || user_data.type=="secretariat") {                 
                     //automatic fetch for operative users
                    // showLoading(["Logging in", "Loading user data"]);
                     verifyToken(function(){
