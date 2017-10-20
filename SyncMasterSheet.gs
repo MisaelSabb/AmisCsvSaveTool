@@ -16,7 +16,8 @@ var SyncMasterSheet=new function(){
     var excelData = range.getValues();
     
     //node where save
-    var saveNode = 'dataFromCsvTool/';
+    //var saveNode = 'dataFromCsvTool/';
+    var saveNode = Utility.getSavingNode();
     
     //call the library to store data into FIREBASE
     FirebaseConnector.writeOnFirebase(excelData,saveNode,userToken);

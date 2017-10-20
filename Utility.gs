@@ -82,4 +82,22 @@ var Utility=new (function(){
     Browser.msgBox('test');
   };
   
+   /**
+  * return the saving node for firebase
+  * @param  {Spreadsheet} the spreadsheet object (optional)
+  * @return {string} the firebase node where to save data
+  */
+  this.getSavingNode = function( spreadsheet ) {
+    spreadsheet = spreadsheet || SpreadSheetCache.getActiveSpreadsheet();
+    //get the spreadsheet name lowercased
+    var name = spreadsheet.getName().toLowerCase();  
+    //look into 
+    for(var key in Config.fileNameDataSaveNodeMapping){    
+      if(name.indexOf(key) > -1)
+      {
+        return Config.fileNameDataSaveNodeMapping[key]+'/';
+      }      
+    }    
+  };
+  
 });
