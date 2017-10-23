@@ -5,7 +5,7 @@ function onOpen(){
   
   //alert for amis menu
   if (!Config.devMode) {
-  Browser.msgBox('To Open SAVE DATA TOOL click on "SAVE DATA TOOL" in the menu');
+  Browser.msgBox('To Open the AMIS SECRETARIAT TOOL click on "AMIS SECRETARIAT" in the menu');
   }
   
 }  
