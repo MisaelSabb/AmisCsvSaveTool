@@ -8,7 +8,7 @@ var Utility=new (function(){
     
     //create the menu voice
     SpreadsheetApp.getUi()
-    .createMenu('SAVE DATA TOOL')
+    .createMenu('AMIS SECRETARIAT')
     .addItem('Open', 'openSidebar')
     .addToUi()
   }
