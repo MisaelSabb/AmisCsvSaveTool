@@ -27,13 +27,13 @@ var Utility=new (function(){
     //countryCell=SpreadsheetApp.getActiveSpreadsheet().getActiveSheet().getRange(Config.Sheet.countryCell).getValue();
     //datasourceCell=SpreadsheetApp.getActiveSpreadsheet().getActiveSheet().getRange(Config.Sheet.datasourceCell).getValue();
     
-    countryCell='Save data tool';
+    countryCell='Amis Secretariat Tool';
     datasourceCell='';
     
     devMode=Config.devMode;
     var html = HtmlService.createTemplateFromFile('menu')
     .evaluate()
-    .setTitle('SAVE DATA TOOL')
+    .setTitle('AMIS SECRETARIAT TOOL')
     .setWidth(500)
     .setSandboxMode(HtmlService.SandboxMode.IFRAME);
     SpreadsheetApp.getUi() // Or DocumentApp or FormApp.
