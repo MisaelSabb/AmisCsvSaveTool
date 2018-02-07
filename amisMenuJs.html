@@ -6,6 +6,8 @@
 <script>
         var hideLoading, showLoading, userToken;
 
+        var countryRegister, templateCompiler;
+        var countries=[];
        //-----------------------------------------------------------------
        // Initialize Firebase
        //-----------------------------------------------------------------
@@ -151,6 +153,77 @@
        }
 
 
+       /**
+        * get the countryLabel node from firebase
+        * @param  {function} onSuccess callback called with the countryRegister object
+        * @return {void}
+        */
+       function getRegister(onSuccess) {
+           firebase.database().ref('/config/countryRegister').once('value').then(function(value) {
+               onSuccess(value);
+           });
+       }
+       
+       /**
+        * get the countryLabel node from firebase
+        * @param  {function} onSuccess callback called with the countryRegister object
+        * @return {void}
+        */
+       function getTemplateCompiler(onSuccess) {
+           firebase.database().ref('/config/templateCompiler').once('value').then(function(value) {
+               onSuccess(value);
+           });
+       }
+       
+        /**
+       * propagate changes in ALL spreadsheet for each country
+       * @param  {object} templateCompiler
+       * @param  {object} countryRegister
+       * @param  {number} countryIndex don't put it, leave undefined
+       * @return {void}
+       */
+      function propagateAllSpreadsheet(templateComp, countryReg, countryIndex) {
+          countryIndex=(countryIndex || 0);
+          if (!countries[countryIndex] || !templateComp || !countryReg) {
+              hideLoading();
+              return;
+          }
+          propagateNationalSpreadsheet(countries[countryIndex], templateComp, countryReg, function(){
+              propagateAllSpreadsheet(templateComp, countryReg, countryIndex+1)
+          });
+      }
+
+
+       /**
+            * propagate changes in a SINGLE national spreadsheet
+            * @param  {string}   country  the country, NO UPPERCASE
+            * @param  {object} templateCompiler
+            * @param  {object} countryRegister
+            * @param  {Function} callback callback to execute if all the processes succeded
+            * @return {void}
+       */
+        function propagateNationalSpreadsheet(country, templateComp, countryReg,  callback) {
+        callback=(callback || function(){});
+
+        if (!country || !templateComp || !countryReg) {
+          return;
+        }
+
+        showLoading(["Propagating data", "Sending data to Spreadsheets"]);
+
+        //   Preparing the spreadsheet-------------------------
+          console.log("Preparing the spreadsheet for "+country);
+          google.script.run
+          .withSuccessHandler(function(){
+                             console.log("Propagating changes into spreadsheet for "+country);
+                             callback();                                         
+          })
+          .withFailureHandler( function(error){
+              console.error("Failed propagating changes into spreadsheet for "+country, error);
+          })
+          .LIB_FUNC("RefreshSheet.refreshMetadataAndNodeAllSpreadSheets",templateComp[country],countryReg[country]);
+      }
+
 
 
        $( document ).ready( function() {
@@ -170,19 +243,38 @@
            //binding SAVE function with AMIS MARKET API
            $( "#buttonSave" ).bind( "click", function() {
                showLoading(["Saving data", "Sending data to the database", "Synchronizing the sheet"]);
+               console.info('templateCompiler',templateCompiler);
                verifyToken(function(){
                    google.script.run.withSuccessHandler(hideLoading).LIB_FUNC( "SyncMasterSheet.startSync", userToken );
                });               
-           } );           
-           //binding FETCH function with AMIS MARKET API
-           $("#buttonFetch").bind( "click", function() {
-               showLoading(["Loading data from the database", "Synchronizing the sheet"]);
-               verifyToken(function(){
-                   google.script.run.withSuccessHandler(hideLoading).LIB_FUNC("SyncMasterSheet.startFetch",userToken);
-               });
-           });          
-          
+           } );                      
 
+
+           //binding PROPAGATE function with AMIS MARKET API
+           $( "#buttonPropagate" ).bind( "click", function() {
+               //showLoading(["Propagating data", "Sending data to Spreadsheets"]);
+               console.info('templateCompiler',templateCompiler);
+               console.info('countryRegister',countryRegister);               
+               console.info('countries',countries);  
+               verifyToken(function(){
+                    //set countryRegister and templateCompiler
+                    getRegister(function(value){                     
+                       countryRegister= value.val();
+                       for(var country in countryRegister){                     
+                         countries.push(country);
+                       }
+                       getTemplateCompiler(function(value){
+                         templateCompiler=  value.val();
+                         
+                         //call propagateAllSpreadsheet
+                         propagateAllSpreadsheet(templateCompiler, countryRegister);
+                       });                       
+                    });
+                   
+               });               
+           } );     
+           
+          
 
        } )
 </script>
