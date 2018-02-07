@@ -49,6 +49,12 @@ var Config={
 	fileNameDataSaveNodeMapping:{
 		crop:"dataFromCsvTool",
 		datasource:"dataFromDataSourceTool"        
-	}
+	},
+
+    /**
+	 * the keyword to recognize the template spreadsheet by the filename
+	 * @type {String}
+	 */
+	templatePrefix:"Template_"
 
 };
