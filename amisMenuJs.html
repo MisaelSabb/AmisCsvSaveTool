@@ -242,8 +242,7 @@
 
            //binding SAVE function with AMIS MARKET API
            $( "#buttonSave" ).bind( "click", function() {
-               showLoading(["Saving data", "Sending data to the database", "Synchronizing the sheet"]);
-               console.info('templateCompiler',templateCompiler);
+               showLoading(["Saving data", "Sending data to the database", "Synchronizing the sheet"]);               
                verifyToken(function(){
                    google.script.run.withSuccessHandler(hideLoading).LIB_FUNC( "SyncMasterSheet.startSync", userToken );
                });               
