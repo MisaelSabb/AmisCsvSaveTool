@@ -47,8 +47,9 @@ var Config={
 	 * @type {String}
 	 */
 	fileNameDataSaveNodeMapping:{
-		crop:"dataFromCsvTool",
-		datasource:"dataFromDataSourceTool"        
+      crop:"dataFromCsvTool",
+      datasource:"dataFromDataSourceTool" ,       
+      footnotestool: "dataFromFootNotesTool"
 	},
 
     /**
