@@ -39,8 +39,10 @@
        /**
         * callBack For All google script calls
         */
-       hideLoading = function() {
-          $('#loading').hide();
+       hideLoading = function(time) {
+          //$('#loading').hide();
+          time = time ? time : 100;
+         setTimeout(function(){  $('#loading').hide(); }, time);
        };
 
        /**
@@ -244,7 +246,7 @@
            $( "#buttonSave" ).bind( "click", function() {
                showLoading(["Saving data", "Sending data to the database", "Synchronizing the sheet"]);               
                verifyToken(function(){
-                   google.script.run.withSuccessHandler(hideLoading).LIB_FUNC( "SyncMasterSheet.startSync", userToken );
+                   google.script.run.withSuccessHandler(function(){ hideLoading(18000);}).LIB_FUNC( "SyncMasterSheet.startSync", userToken );
                });               
            } );                      
 
