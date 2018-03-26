@@ -246,7 +246,7 @@
            $( "#buttonSave" ).bind( "click", function() {
                showLoading(["Saving data", "Sending data to the database", "Synchronizing the sheet"]);               
                verifyToken(function(){
-                   google.script.run.withSuccessHandler(function(){ hideLoading(18000);}).LIB_FUNC( "SyncMasterSheet.startSync", userToken );
+                   google.script.run.withSuccessHandler(function(){ hideLoading(28000);}).LIB_FUNC( "SyncMasterSheet.startSync", userToken );
                });               
            } );                      
 
